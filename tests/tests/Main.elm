@@ -39,11 +39,3 @@ tests =
         , Maybe.tests
         , Tuple.tests
         ]
-
-
-main : TestProgram
-main =
-    run emit tests
-
-
-port emit : ( String, Value ) -> Cmd msg
