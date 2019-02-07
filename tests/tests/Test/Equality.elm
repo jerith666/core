@@ -3,6 +3,7 @@ module Test.Equality exposing (tests)
 import Basics exposing (..)
 import Maybe exposing (..)
 import Test exposing (..)
+import List
 import Expect
 
 
@@ -31,4 +32,23 @@ tests =
                 , test "ctor diff, special case" <| \() -> Expect.equal True ({ ctor = Just 3 } /= { ctor = Nothing })
                 ]
     in
-        describe "Equality Tests" [ diffTests, recordTests ]
+        describe "Equality Tests" [ diffTests, recordTests, nestingThreshold ]
+
+{-https://github.com/elm/core/issues/1011-}
+nestingThreshold : Test
+nestingThreshold =
+    let
+        oneThing = True
+        someThings n = List.repeat n oneThing
+        dangerousThreshold = 100 --keep in sync with ... TODO
+        buffer = 2
+        range = List.range (dangerousThreshold - buffer) (dangerousThreshold + buffer)
+        lengthPairsToTest = List.concatMap (\i -> List.map (\j -> ( i, j )) range) range
+        check (l1, l2) =
+            test ("compare lists of length " ++ String.fromInt l1 ++ " and " ++ String.fromInt l2) <| \() ->
+                Expect.equal
+                    (l1 == l2)
+                    (someThings l1 == someThings l2)
+    in
+    describe "Nesting Threshold" <|
+        List.map check lengthPairsToTest
