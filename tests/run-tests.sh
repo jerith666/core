@@ -37,7 +37,9 @@ rm -rf elm-stuff;
 
 echo "seeding framework for test dependencies ...";
 
-# '|| true' lets us ignore failures here and keep the script running
+# '|| true' lets us ignore failures here and keep the script running.
+# useful when developing a fix for a bug that exists in the version of
+# elm/core hosted on package.elm-lang.org
 "${ELM_TEST}" tests/Main.elm > /dev/null || true;
 
 # clear out the copy of elm-core fetched by the above and replace it
@@ -47,9 +49,12 @@ VERSION_DIR="$(ls ${ELM_HOME}/0.19.0/package/elm/core/)"
 CORE_PACKAGE_DIR="${ELM_HOME}/0.19.0/package/elm/core/$VERSION_DIR"
 CORE_GIT_DIR="$(dirname $PWD)"
 
+echo; 
 echo "Linking $CORE_PACKAGE_DIR to $CORE_GIT_DIR"
-rm -rf $CORE_PACKAGE_DIR
-ln -s $CORE_GIT_DIR $CORE_PACKAGE_DIR
+echo; 
+rm -rf "$CORE_PACKAGE_DIR"
+ln -sv "$CORE_GIT_DIR" "$CORE_PACKAGE_DIR"
+rm -vf "${CORE_GIT_DIR}"/*.dat "${CORE_GIT_DIR}"/doc*.json
 
 # we also need to clear out elm-test's elm-stuff dir, since otherwise
 # the compiler complains that its .dat files are out of sync
@@ -58,6 +63,8 @@ rm -rf elm-stuff;
 
 # now we can run the tests against the symlinked source code for real
 
+echo;
 echo "running tests ...";
+echo;
 
 "${ELM_TEST}" tests/Main.elm;
