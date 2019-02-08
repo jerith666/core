@@ -5,6 +5,8 @@ import Expect
 import Basics exposing (..)
 import Maybe exposing (Maybe(..))
 import List exposing (..)
+import Tuple
+import String
 
 
 tests : Test

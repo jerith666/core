@@ -3,9 +3,10 @@ module Test.Result exposing (tests)
 import Basics exposing (..)
 import Result
 import Result exposing (Result(..))
-import String
+import String exposing (String)
 import Test exposing (..)
 import Expect
+import Maybe exposing (Maybe(..))
 
 
 isEven n =

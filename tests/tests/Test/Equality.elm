@@ -4,6 +4,7 @@ import Basics exposing (..)
 import Maybe exposing (..)
 import Test exposing (..)
 import Expect
+import String exposing (String)
 
 
 type Different

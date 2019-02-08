@@ -4,7 +4,7 @@ import Basics exposing (..)
 import List
 import Maybe exposing (..)
 import Result exposing (Result(..))
-import String
+import String exposing (String)
 import Test exposing (..)
 import Expect
 

@@ -6,6 +6,7 @@ import List
 import Maybe exposing (..)
 import Test exposing (..)
 import Expect
+import String exposing (String)
 
 
 animals : Dict.Dict String String

@@ -3,7 +3,7 @@ module Test.Array exposing (tests)
 import Array exposing (..)
 import Basics exposing (..)
 import List exposing ((::))
-import Maybe
+import Maybe exposing (Maybe(..))
 import Test exposing (..)
 import Fuzz exposing (Fuzzer, intRange)
 import Expect

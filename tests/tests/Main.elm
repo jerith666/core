@@ -1,11 +1,6 @@
-port module Main exposing (..)
+module Main exposing (..)
 
-import Basics exposing (..)
-import Task exposing (..)
 import Test exposing (..)
-import Platform.Cmd exposing (Cmd)
-import Json.Decode exposing (Value)
-import Test.Runner.Node exposing (run, TestProgram)
 import Test.Array as Array
 import Test.Basics as Basics
 import Test.Bitwise as Bitwise
